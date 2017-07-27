@@ -73,3 +73,9 @@ To run the application you must run the following command in the root directory
 ```
 python manage.py run
 ```
+
+## Testing the Application
+To run the tests for the application you must run the following command in the root directory
+```
+python setup.py test
+```

@@ -17,13 +17,20 @@ class AppTestCase(TestCase):
   def init_data(self):
     #default data initilization
     location = Location(street_address='123 Test St', city='New York', state='New York', zipcode='10036')
-    company = Company(name='Test Company', industry='Poultry', headquarter_location_id=location.id)
     db.session.add(location)
+    db.session.flush()
+    company = Company(name='Test Company', industry='Poultry', headquarter_location_id=location.id)
     db.session.add(company)
+    db.session.flush()
+    user = User(
+      'John', 'Doe', 'jdoe', 'jdoe@gmail.com', 'Manager', 'test123', location.id, company.id
+    )
+    db.session.add(user)
     db.session.commit()
 
   def setUp(self):
     """Reset all tables before testing."""
+    db.session.close()
     db.create_all()
     self.init_data()
 

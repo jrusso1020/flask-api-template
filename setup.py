@@ -22,8 +22,6 @@ setup(
   packages=find_packages(),
   install_requires=requirements,
   include_package_data=True,
-  test_suite='nose2.collector.collector',
-  tests_require=['nose2'],
   cmdclass={
         'clean': CleanCommand,
     }

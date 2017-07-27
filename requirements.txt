@@ -21,3 +21,4 @@ itsdangerous
 pyjwt
 cffi
 pycparser
+nose2
