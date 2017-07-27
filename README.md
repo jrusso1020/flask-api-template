@@ -14,6 +14,9 @@ python setup.py install
 python setup.py clean
 ```
 
+## Environment Variables
+This template uses environment variables to store the SECRET_KEY value, DATABASE_URL, and TEST_DATABASE_URL. So make sure you create a `.env` file in the root directory and populate those values, you can see them being used in the `app/config.py` file.
+
 ## Postgres
 
 Install Postgres
@@ -75,7 +78,7 @@ python manage.py run
 ```
 
 ## Testing the Application
-To run the tests for the application you must run the following command in the root directory
+To test the application you must run the following command in the root directory
 ```
-python setup.py test
+nose2
 ```
