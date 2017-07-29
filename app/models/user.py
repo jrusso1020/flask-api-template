@@ -39,9 +39,10 @@ class User(db.Model):
     self.last_name = last_name
     self.username = username
     self.email = email
-    self.password = bcrypt.generate_password_hash(
-            password, config.BCRYPT_LOG_ROUNDS
+    hashed_password = bcrypt.generate_password_hash(
+            password, app.config['BCRYPT_LOG_ROUNDS']
         )
+    self.password = hashed_password if type(hashed_password)==str else hashed_password.decode('utf-8')
 
   def encode_auth_token(self, user_id):
     try:
@@ -52,13 +53,14 @@ class User(db.Model):
       }
       token = jwt.encode(
           payload,
-          config.SECRET_KEY,
+          app.config['SECRET_KEY'],
           algorithm='HS256'
         )
       user = User.by_id(user_id)
-      user.api_token_hash = bcrypt.generate_password_hash(
-            token, config.BCRYPT_LOG_ROUNDS
+      hashed_token = bcrypt.generate_password_hash(
+            token, app.config['BCRYPT_LOG_ROUNDS']
         )
+      user.api_token_hash = hashed_token if type(hashed_token)==str else hashed_token.decode('utf-8')
       db.session.commit()
       return token
     except Exception as e:
