@@ -12,26 +12,19 @@ class TestAuth(AppTestCase):
         last_name='Tester',
         username='tester',
         email='tester@gmail.com',
-        position='Bossman',
-        password='tester',
-        location_id=user.location_id,
-        company_id=user.company_id)), content_type='application/json')
+        password='tester')), content_type='application/json')
     data = json.loads(response.data.decode())
-    self.assertTrue(data['success'])
-    self.assertTrue(data['message']=='Successfully registered.')
     self.assertTrue(data['auth_token'])
     self.assertTrue(response.content_type=='application/json')
-    self.assertEqual(response.status_code, 200)
+    self.assertEqual(response.status_code, 201)
 
   def test_login_logout(self):
+    user = User.by_username('jdoe')
     response, data = self.login('jdoe', 'test123')
-    self.assertTrue(data['success'])
-    self.assertTrue(data['message']=='Login Successful!')
     self.assertTrue(data['auth_token'])
     self.assertTrue(response.content_type=='application/json')
     self.assertEqual(response.status_code, 200)
     response = self.client.post(API_ROOT+'/auth/logout', headers=dict(Authorization=data['auth_token']))
     data = json.loads(response.data.decode())
-    self.assertTrue(data['success'])
-    self.assertTrue(data['message']=='Logout Successful')
+    self.assertTrue(data['user'])
     self.assertEqual(response.status_code, 200)

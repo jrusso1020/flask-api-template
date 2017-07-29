@@ -7,6 +7,8 @@ Flask-Migrate
 Flask-Script
 Flask-WTF
 Flask-Testing
+flask-cors
+flask-restful
 SQLAlchemy
 alembic
 simplejson
