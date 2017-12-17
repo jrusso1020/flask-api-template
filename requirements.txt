@@ -24,3 +24,5 @@ pyjwt
 cffi
 pycparser
 nose2
+celery[redis]
+flower

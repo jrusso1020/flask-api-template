@@ -6,6 +6,10 @@ from flask_marshmallow import Marshmallow
 from flask_bcrypt import Bcrypt
 # flask_restful
 from flask_restful import Api
+# celery
+from celery import Celery
+
+celery = Celery()
 
 db = SQLAlchemy()
 
