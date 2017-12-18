@@ -7,7 +7,7 @@ from .constants import INSTANCE_FOLDER_PATH
 
 # from .api import
 from .api import SignupAPI, LoginAPI, LogoutAPI
-from .extensions import db, ma, bcrypt, api, celery
+from .extensions import db, ma, bcrypt, api
 
 # For import *
 __all__ = ['create_app']
@@ -61,10 +61,6 @@ def configure_extensions(app):
 
   # bcrypt
   bcrypt.init_app(app)
-
-  #celery
-  celery.config_from_object('celeryconfig')
-
 
 def configure_endpoints(app):
   """Configure blueprints in views."""
